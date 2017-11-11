@@ -28,7 +28,7 @@ const Painting = styled.div`
   /* Shadows */
   box-shadow: 0px 16px 32px #888888;
 `
-console.log(VanGogh1)
+
 class App extends Component {
   render() {
     return (
