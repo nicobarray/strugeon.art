@@ -8,8 +8,8 @@ import {
 import styled from 'styled-components'
 
 // Pages.
-import Paintings from './pages/Paintings'
-import Sculptures from './pages/Sculptures'
+import Paintings from './containers/Paintings'
+import Sculptures from './containers/Sculptures'
 
 // Components.
 import AppMenu from './components/AppMenu'

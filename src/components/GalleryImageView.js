@@ -2,7 +2,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Image } from '../pages/styled'
+import { Image } from './styled'
 
 const ImageView = styled.div`
     min-height: 600px;
