@@ -4,21 +4,31 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 const View = styled.div`
-    /* Dimensions. */
-    width: 300px;
+    /* Dimensions */
+    height: 200px;
+
     margin: auto;
     padding-top: 32px;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
 
     /* Layout */
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+
+    /* Background */
+    background-color: #313131;
 `
 
 const PageLink = styled(Link) `
+    /* Dimensions */
+    margin: 8px;
+
     /* Text */
     text-decoration: none;
-    font-size: 1em;
-    color: #313131;
+    font-size: 2em;
+    color: white;
 
     :hover {
         text-decoration: underline;

@@ -12,9 +12,8 @@ export const View = styled.div`
 
 export const Image = styled.img`
     /* Dimensions */
-    width: 300px;
-    height: auto;
-    margin: 32px;
+    max-width: 300px;
+    max-height: ${props => props.height ? props.height + 'px' : 'auto'};
 
     /* Shadows */
     box-shadow: 0px 16px 32px #888888;
