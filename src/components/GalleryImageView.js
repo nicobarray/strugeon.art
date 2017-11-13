@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { Image } from './styled'
 
 const ImageView = styled.div`
-    min-height: 600px;
+    min-height: 500px;
 
     display: flex;
     justify-content: space-between;

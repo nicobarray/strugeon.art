@@ -7,9 +7,13 @@ import ClearActiveFiltersButton from '../containers/ClearActiveFiltersButton'
 
 const FilterView = styled.div`
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
 
     padding: 32px;
+
+    > div {
+        margin-right: 8px;
+    }
 `
 
 const SculpturesPage = props => {
