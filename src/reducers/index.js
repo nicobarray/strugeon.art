@@ -111,18 +111,21 @@ export const actionCreators = {
     }
 }
 
+const isMatchingFilter = (features, state) =>
+    state.activeFilters.filter(filter => features.includes(filter)).length === state.activeFilters.length;
 export const selectors = {
     listPaintings: (state) => {
-        return Object.values(state.arts).filter(art => art.type === 'PAINTING')
+        return Object.values(state.arts).filter(art => art.type === 'PAINTING' && isMatchingFilter(art.features, state))
     },
     listSculptures: (state) => {
-        return Object.values(state.arts).filter(art => art.type === 'SCULPTURE')
+        return Object.values(state.arts).filter(art => art.type === 'SCULPTURE' && isMatchingFilter(art.features, state))
     },
     getArt: (aid, state) => {
         return state.arts[aid]
     },
     listFilters: (type, state) => state.filters[type],
     listActiveFilters: (state) => state.activeFilters,
+    isMatchingFilter,
     getLastEventTimestamp: (state) => state.events.lastTimestamp,
     getLastEventType: (state) => state.events.lastEvent
 }

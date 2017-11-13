@@ -9,7 +9,7 @@ import styled from 'styled-components'
 
 // Pages.
 import Paintings from './pages/PaintingsPage'
-import Sculptures from './containers/Sculptures'
+import Sculptures from './pages/SculpturesPage'
 
 // Components.
 import AppMenu from './components/AppMenu'

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Paintings from '../containers/Paintings'
+import Sculptures from '../containers/Sculptures'
 import FilterMenu from '../containers/FilterMenu'
 import ClearActiveFiltersButton from '../containers/ClearActiveFiltersButton'
 
@@ -12,14 +12,14 @@ const FilterView = styled.div`
     padding: 32px;
 `
 
-const PaintingsPage = props => {
+const SculpturesPage = props => {
     return <div>
         <FilterView>
-            <FilterMenu type={'PAINTING'} />
+            <FilterMenu type={'SCULPTURE'} />
             <ClearActiveFiltersButton />
         </FilterView>
-        <Paintings />
+        <Sculptures />
     </div>
 }
 
-export default PaintingsPage
+export default SculpturesPage

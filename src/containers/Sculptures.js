@@ -4,8 +4,9 @@ import { selectors } from '../reducers'
 import ArtList from '../components/ArtList'
 
 const mapStateToProps = (state, props) => {
+    const sculptures = selectors.listSculptures(state)
     return {
-        arts: selectors.listSculptures(state)
+        arts: sculptures
     }
 }
 
