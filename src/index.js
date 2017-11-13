@@ -7,7 +7,13 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import configureStore from './configureStore';
 
+import { actionCreators } from './reducers'
+
 const store = configureStore()
+
+// window.addEventListener('click', e => {
+//     store.dispatch(actionCreators.events.clickAway())
+// })
 
 ReactDOM.render(
     <Provider store={store}>

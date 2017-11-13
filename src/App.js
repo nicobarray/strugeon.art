@@ -8,7 +8,7 @@ import {
 import styled from 'styled-components'
 
 // Pages.
-import Paintings from './containers/Paintings'
+import Paintings from './pages/PaintingsPage'
 import Sculptures from './containers/Sculptures'
 
 // Components.

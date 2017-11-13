@@ -1,8 +1,28 @@
+import uniq from "lodash/uniq";
+
 export const initialState = {
     arts: {},
+    filters: {
+        PAINTING: [],
+        SCULPTURE: []
+    },
+    activeFilters: [],
+    events: {
+        lastEvent: null,
+        lastTimestamp: 0
+    }
 }
 
 const reducers = (prevState = initialState, action) => {
+    if (action.type.indexOf('EVENT_') === 0) {
+        return {
+            ...prevState,
+            events: {
+                lastEvent: action.type,
+                lastTimestamp: action.payload.timestamp
+            }
+        }
+    }
     if (action.type === actionTypes.ART_ADD) {
         return {
             ...prevState,
@@ -12,7 +32,32 @@ const reducers = (prevState = initialState, action) => {
                     aid: action.aid,
                     ...action.payload
                 }
+            },
+            filters: {
+                ...prevState.filters,
+                [action.payload.type]: uniq([...prevState.filters[action.payload.type], ...action.payload.features])
             }
+        }
+    }
+    if (action.type === actionTypes.SET_FILTER) {
+        return {
+            ...prevState,
+            activeFilters: uniq([
+                ...prevState.activeFilters,
+                action.payload.filter
+            ])
+        }
+    }
+    if (action.type === actionTypes.REMOVE_FILTER) {
+        return {
+            ...prevState,
+            activeFilters: prevState.activeFilters.filter(filter => filter !== action.payload.filter)
+        }
+    }
+    if (action.type === actionTypes.CLEAR_FILTERS) {
+        return {
+            ...prevState,
+            activeFilters: []
         }
     }
 
@@ -21,23 +66,48 @@ const reducers = (prevState = initialState, action) => {
 
 export const actionTypes = {
     ART_ADD: 'PAINTING_ADD',
+    SET_FILTER: 'SET_FILTER',
+    REMOVE_FILTER: 'REMOVE_FILTER',
+    CLEAR_FILTERS: 'CLEAR_FILTERS',
+    EVENT_CLICK_AWAY: 'EVENT_CLICK_AWAY'
 }
 
 export const actionCreators = {
     arts: {
-        add: (aid, type, title, date, height, features = []) => {
-            return {
-                type: actionTypes.ART_ADD,
-                aid,
-                payload: {
-                    type,
-                    title,
-                    date,
-                    height,
-                    features,
-                }
+        add: (aid, type, title, date, height, features = []) => ({
+            type: actionTypes.ART_ADD,
+            aid,
+            payload: {
+                type,
+                title,
+                date,
+                height,
+                features,
             }
-        }
+        })
+    },
+    filters: {
+        set: (filter) => ({
+            type: actionTypes.SET_FILTER,
+            payload: {
+                filter
+            }
+        }),
+        remove: (filter) => ({
+            type: actionTypes.REMOVE_FILTER,
+            payload: {
+                filter
+            }
+        }),
+        clear: () => ({ type: actionTypes.CLEAR_FILTERS })
+    },
+    events: {
+        clickAway: () => ({
+            type: actionTypes.EVENT_CLICK_AWAY,
+            payload: {
+                timestamp: Date.now()
+            }
+        })
     }
 }
 
@@ -50,7 +120,11 @@ export const selectors = {
     },
     getArt: (aid, state) => {
         return state.arts[aid]
-    }
+    },
+    listFilters: (type, state) => state.filters[type],
+    listActiveFilters: (state) => state.activeFilters,
+    getLastEventTimestamp: (state) => state.events.lastTimestamp,
+    getLastEventType: (state) => state.events.lastEvent
 }
 
 export default reducers

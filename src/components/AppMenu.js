@@ -10,7 +10,6 @@ const View = styled.div`
     margin: auto;
     padding-top: 32px;
     padding-bottom: 32px;
-    margin-bottom: 32px;
 
     /* Layout */
     display: flex;
