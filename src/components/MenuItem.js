@@ -4,11 +4,23 @@ import { compose } from 'recompact'
 import { connect } from 'react-redux'
 
 import { selectors, actionCreators } from '../reducers'
+import Button from './Button'
 
-const MenuItemButton = styled.button``
+const MenuItemButton = Button.extend`
+    /* Text */
+    color: white;
+    font-size: 1.2em;
+    border-radius: 0;
+    border: 0;
 
-const MenuItem = props => {
-    return <MenuItemButton onClick={e => { props.onClick(props.active)(e) }}>{props.active ? props.label + ' ⬅' : props.label}</MenuItemButton>
+    background-color: #313131;
+    :hover {
+        background-color: #315131;
+    }
+`
+
+const MenuItem = ({ onClick, ...rest }) => {
+    return <MenuItemButton {...rest} onClick={e => { onClick(rest.active)(e) }}>{rest.active ? rest.label + ' ⬅' : rest.label}</MenuItemButton>
 }
 
 const mapStateToProps = (state, props) => {
