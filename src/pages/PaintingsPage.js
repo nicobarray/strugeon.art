@@ -6,24 +6,28 @@ import FilterMenu from '../containers/FilterMenu'
 import ClearActiveFiltersButton from '../containers/ClearActiveFiltersButton'
 
 const FilterView = styled.div`
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    padding: 32px;
-    
-    > div {
-        margin-right: 8px;
-    }
+  padding: 32px;
+
+  > div {
+    margin-right: 8px;
+  }
 `
 
-const PaintingsPage = props => {
-    return <div>
+class PaintingsPage extends React.Component {
+  render() {
+    return (
+      <div>
         <FilterView>
-            <FilterMenu type={'PAINTING'} />
-            <ClearActiveFiltersButton />
+          <FilterMenu type={'painting'} />
+          <ClearActiveFiltersButton />
         </FilterView>
         <Paintings />
-    </div>
+      </div>
+    )
+  }
 }
 
 export default PaintingsPage

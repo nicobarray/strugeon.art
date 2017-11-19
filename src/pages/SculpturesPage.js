@@ -6,24 +6,26 @@ import FilterMenu from '../containers/FilterMenu'
 import ClearActiveFiltersButton from '../containers/ClearActiveFiltersButton'
 
 const FilterView = styled.div`
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 
-    padding: 32px;
+  padding: 32px;
 
-    > div {
-        margin-right: 8px;
-    }
+  > div {
+    margin-right: 8px;
+  }
 `
 
 const SculpturesPage = props => {
-    return <div>
-        <FilterView>
-            <FilterMenu type={'SCULPTURE'} />
-            <ClearActiveFiltersButton />
-        </FilterView>
-        <Sculptures />
+  return (
+    <div>
+      <FilterView>
+        <FilterMenu type={'sculpture'} />
+        <ClearActiveFiltersButton />
+      </FilterView>
+      <Sculptures />
     </div>
+  )
 }
 
 export default SculpturesPage

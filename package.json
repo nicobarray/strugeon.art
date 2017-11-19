@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sanity/client": "^0.121.0",
     "image-size": "^0.6.1",
     "lodash": "^4.17.4",
     "react": "^16.1.0",
