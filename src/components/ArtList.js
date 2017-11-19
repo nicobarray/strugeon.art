@@ -3,7 +3,7 @@ import React from 'react'
 
 // Components.
 import { View } from './styled'
-import GalleryImageView from './GalleryImageView'
+import ArtItem from './ArtItem'
 
 /* PropTypes:
 {
@@ -15,13 +15,13 @@ const ArtList = props => (
     {props.arts &&
       props.arts.map((art, index) => {
         return (
-          <GalleryImageView
+          <ArtItem
             key={art.aid}
             image={art.imageUrl}
             height={art.height}
             title={art.title}
             date={art.date}
-            features={art.features.join(',')}
+            features={art.features.join(', ')}
           />
         )
       })}
