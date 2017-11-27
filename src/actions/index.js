@@ -1,38 +1,39 @@
 import actionTypes from '../constants/actionTypes'
 
-const setArtworkType = artwork => {
-  if (artwork.categories.find(cat => cat === 'peinture')) return 'painting'
-  if (artwork.categories.find(cat => cat === 'sculpture')) return 'sculpture'
-  if (artwork.categories.find(cat => cat === 'dessin')) return 'drawing'
-  return 'none'
-}
-
 const actionCreators = {
+  who: {
+    add: (description, email) => ({
+      type: actionTypes.WHO_ADD_INFO,
+      description,
+      email
+    })
+  },
   arts: {
-    add: (aid, type, title, date, height, imageUrl, features = []) => ({
+    add: (data, contentType) => ({
       type: actionTypes.ART_ADD,
-      aid,
       payload: {
-        type,
-        title,
-        date,
-        height,
-        features,
-        imageUrl
+        contentType,
+        id: data._id,
+        title: data.title,
+        date: data.date,
+        features: data.categories,
+        height: data.width,
+        width: data.height,
+        imageUrl: data.imageUrl
       }
     }),
-    addBatch: artworks => ({
+    addBatch: (artworks, contentType) => ({
       type: actionTypes.ART_ADD_BATCH,
       payload: {
+        contentType,
         artworks: artworks.map(data => ({
-          aid: data._id,
-          type: setArtworkType(data),
+          _id: data._id,
+          contentType,
           title: data.title,
           date: data.date,
-          features: data.categories.filter(
-            cat => cat !== 'peinture' && cat !== 'dessin' && cat !== 'sculpture'
-          ),
-          height: 300,
+          categories: data.categories,
+          width: data.width,
+          height: data.height,
           imageUrl: data.imageUrl
         }))
       }

@@ -1,21 +1,23 @@
 import uniq from 'lodash/uniq'
 
-const add = (prevState, action) => ({
-  ...prevState,
-  arts: {
-    ...prevState.arts,
-    [action.aid]: {
-      aid: action.aid,
-      ...action.payload
+const add = (prevState, action) => {
+  return {
+    ...prevState,
+    [action.payload.contentType]: {
+      ...prevState[action.payload.contentType],
+      [action.payload.id]: {
+        id: action.payload.id,
+        ...action.payload
+      }
+    },
+    filters: {
+      ...prevState.filters,
+      [action.payload.contentType]: uniq([
+        ...prevState.filters[action.payload.contentType],
+        ...action.payload.features
+      ])
     }
-  },
-  filters: {
-    ...prevState.filters,
-    [action.payload.type]: uniq([
-      ...prevState.filters[action.payload.type],
-      ...action.payload.features
-    ])
   }
-})
+}
 
 export default add

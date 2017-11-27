@@ -16,11 +16,15 @@ const ArtList = props => (
       props.arts.map((art, index) => {
         return (
           <ArtItem
-            key={art.aid}
+            key={art.id}
             image={art.imageUrl}
-            height={art.height}
+            height={300}
             title={art.title}
             date={art.date}
+            dimension={{
+              width: art.width,
+              height: art.height
+            }}
             features={art.features.join(', ')}
           />
         )

@@ -6,4 +6,22 @@ body {
 
 * {
   box-sizing: border-box;
+  font-family: 'Quicksand';
+}
+
+@font-face {
+  font-family: 'Quicksand';
+  src: url('./res/Quicksand_Light.otf') format('OpenType');
+}
+
+/* Animations */
+
+.fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 250ms ease-in;
 }

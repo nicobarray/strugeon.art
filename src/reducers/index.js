@@ -6,26 +6,29 @@ import actionTypes from '../constants/actionTypes'
 import add from './art/add'
 
 export const initialState = {
-  arts: {},
+  painting: {},
+  drawing: {},
+  sculpture: {},
   filters: {
     painting: [],
     sculpture: [],
     drawing: []
   },
   activeFilters: [],
-  events: {
-    lastEvent: null,
-    lastTimestamp: 0
+  who: {
+    description: '',
+    email: ''
   }
 }
 
 const reducers = (prevState = initialState, action) => {
-  if (action.type.indexOf('EVENT_') === 0) {
+  if (action.type === actionTypes.WHO_ADD_INFO) {
     return {
       ...prevState,
-      events: {
-        lastEvent: action.type,
-        lastTimestamp: action.payload.timestamp
+      who: {
+        ...prevState.who,
+        description: action.description,
+        email: action.email
       }
     }
   }
@@ -33,22 +36,9 @@ const reducers = (prevState = initialState, action) => {
     return add(prevState, action)
   }
   if (action.type === actionTypes.ART_ADD_BATCH) {
-    return action.payload.artworks.reduce(
-      (nextState, payload) =>
-        add(
-          nextState,
-          actionCreators.arts.add(
-            payload.aid,
-            payload.type,
-            payload.title,
-            payload.date,
-            payload.height,
-            payload.imageUrl,
-            payload.features
-          )
-        ),
-      prevState
-    )
+    return action.payload.artworks.reduce((nextState, art) => {
+      return add(nextState, actionCreators.arts.add(art, art.contentType))
+    }, prevState)
   }
   if (action.type === actionTypes.SET_FILTER) {
     return {
@@ -79,19 +69,25 @@ const isMatchingFilter = (features, state) =>
   state.activeFilters.length
 
 export const selectors = {
+  getDescription: state => {
+    return state.who.description
+  },
+  getEmail: state => {
+    return state.who.email
+  },
   listPaintings: state => {
-    return Object.values(state.arts).filter(
-      art => art.type === 'painting' && isMatchingFilter(art.features, state)
+    return Object.values(state.painting).filter(art =>
+      isMatchingFilter(art.features, state)
     )
   },
   listSculptures: state => {
-    return Object.values(state.arts).filter(
-      art => art.type === 'sculpture' && isMatchingFilter(art.features, state)
+    return Object.values(state.sculpture).filter(art =>
+      isMatchingFilter(art.features, state)
     )
   },
   listDrawings: state => {
-    return Object.values(state.arts).filter(
-      art => art.type === 'drawing' && isMatchingFilter(art.features, state)
+    return Object.values(state.drawing).filter(art =>
+      isMatchingFilter(art.features, state)
     )
   },
   getArt: (aid, state) => {
@@ -99,9 +95,7 @@ export const selectors = {
   },
   listFilters: (type, state) => state.filters[type],
   listActiveFilters: state => state.activeFilters,
-  isMatchingFilter,
-  getLastEventTimestamp: state => state.events.lastTimestamp,
-  getLastEventType: state => state.events.lastEvent
+  isMatchingFilter
 }
 
 export default reducers

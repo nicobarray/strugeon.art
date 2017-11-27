@@ -2,27 +2,24 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Sculptures from '../containers/Sculptures'
-import FilterMenu from '../containers/FilterMenu'
-import ClearActiveFiltersButton from '../containers/ClearActiveFiltersButton'
+import Select from '../containers/FilterMenu'
 
-const FilterView = styled.div`
+const FilterView = styled(Select)`
+  width: 80%;
   display: flex;
   justify-content: center;
 
-  padding: 32px;
-
-  > div {
-    margin-right: 8px;
-  }
+  margin: 32px auto 32px;
 `
 
 const SculpturesPage = props => {
   return (
     <div>
-      <FilterView>
-        <FilterMenu type={'sculpture'} />
-        <ClearActiveFiltersButton />
-      </FilterView>
+      <FilterView
+        multi
+        placeholder={'Sélectionner un ou plusieurs critères...'}
+        type={'sculpture'}
+      />
       <Sculptures />
     </div>
   )

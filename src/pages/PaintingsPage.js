@@ -2,28 +2,25 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Paintings from '../containers/Paintings'
-import FilterMenu from '../containers/FilterMenu'
-import ClearActiveFiltersButton from '../containers/ClearActiveFiltersButton'
+import Select from '../containers/FilterMenu'
 
-const FilterView = styled.div`
+const FilterView = styled(Select)`
+  width: 80%;
   display: flex;
   justify-content: center;
 
-  padding: 32px;
-
-  > div {
-    margin-right: 8px;
-  }
+  margin: 32px auto 32px;
 `
 
 class PaintingsPage extends React.Component {
   render() {
     return (
       <div>
-        <FilterView>
-          <FilterMenu type={'painting'} />
-          <ClearActiveFiltersButton />
-        </FilterView>
+        <FilterView
+          multi
+          placeholder={'Sélectionner un ou plusieurs critères...'}
+          type={'painting'}
+        />
         <Paintings />
       </div>
     )

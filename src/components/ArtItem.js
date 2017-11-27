@@ -56,15 +56,34 @@ const ImageFeature = styled.div`
   color: grey;
 `
 
-const ArtItem = props => (
-  <ArtView>
-    <GalleryImage src={props.image} alt="gallery-image" />
-    <ArtTitle>{props.title || 'Painting Title'}</ArtTitle>
-    <ArtInfo height={props.height}>
-      <ImageCreationDate>{props.date || 'Painting Date'}</ImageCreationDate>
-      <ImageFeature>{props.features || 'Painting Feature'}</ImageFeature>
-    </ArtInfo>
-  </ArtView>
-)
+const Dimension = props => {
+  if (props.width) {
+    return (
+      <ImageFeature>
+        Dimension {props.width}x{props.height}cm
+      </ImageFeature>
+    )
+  }
+  return <ImageFeature>Taille {props.height}cm</ImageFeature>
+}
+
+const ArtItem = props => {
+  return (
+    <ArtView>
+      <GalleryImage src={props.image} alt="gallery-image" />
+      <ArtTitle>{props.title || 'Painting Title'}</ArtTitle>
+      <ArtInfo height={props.height}>
+        <ImageCreationDate>{props.date || 'Painting Date'}</ImageCreationDate>
+        <ImageFeature>{props.features || 'Painting Feature'}</ImageFeature>
+        {props.dimension.width || props.dimension.height ? (
+          <Dimension
+            width={props.dimension.width}
+            height={props.dimension.height}
+          />
+        ) : null}
+      </ArtInfo>
+    </ArtView>
+  )
+}
 
 export default ArtItem
