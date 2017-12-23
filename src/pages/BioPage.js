@@ -10,7 +10,7 @@ const View = styled.div`
   align-items: center;
 `
 
-const Description = styled(ReactMarkdown)`
+const Description = styled(ReactMarkdown) `
   margin: 32px;
 
   font-size: 1em;
@@ -19,17 +19,19 @@ const Description = styled(ReactMarkdown)`
   line-height: 1.6em;
 `
 
-const Email = styled.div`
-  margin: 64px;
-
-  font-size: 1.5em;
+const Email = styled.a`
+  margin: 16px;
+  margin-bottom: 32px;
+  font-size: 1em;
+  color: black;
 `
 
 const Who = props => {
   return (
     <View>
       <Description source={props.description} />
-      <Email>{props.email}</Email>
+      Contact:
+      <Email href='mailto:christrugeon@gmail.com'>{props.email}</Email>
     </View>
   )
 }

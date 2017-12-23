@@ -20,7 +20,7 @@ const View = styled.div`
   justify-content: space-between;
 
   /* Color */
-  background: #e9e9e9;
+  background: linear-gradient(45deg, #e9e9e9, white);
   border-bottom: 1px solid #fafafa;
 
   /* Text */
@@ -68,7 +68,7 @@ const Title = styled.div`
 
   /* Text */
   font-size: 32px;
-  color: grey;
+  color: #666;
 
   margin-left: 8px;
 `

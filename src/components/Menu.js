@@ -126,7 +126,7 @@ class Menu extends React.Component {
                 Sculpture
             </PageLink>,
             <PageLink key={3} to={'/qui'} active={'' + (where === 'qui')}>
-                Contact
+                Qui ?
             </PageLink>
         ]
     }
