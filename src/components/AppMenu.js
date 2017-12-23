@@ -49,15 +49,6 @@ const Logo = styled.img`
 
   border-radius: 15%;
 
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
-
   animation: fadein 2s;
 `
 

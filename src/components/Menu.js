@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
+import CloseIcon from '../res/close-icon.png'
+import MenuIcon from '../res/menu-icon.png'
+
 const MenuRoot = styled.div`
   width: 200px;
   
@@ -81,8 +84,7 @@ const MenuButton = styled.button`
 
     padding: 0px;
 
-    border: 1px solid grey;
-    border-radius: 15%;
+    border: 0;
 
     background: transparent;
 
@@ -98,6 +100,10 @@ const ButtonWrapper = styled.div`
     padding: 4px;
 `
 
+const Icon = styled.img`
+    width: 28px;
+    height: 28px;
+`
 
 class Menu extends React.Component {
     state = {
@@ -143,7 +149,7 @@ class Menu extends React.Component {
                     {this.renderLinks()}
                 </Links>
                 <ButtonWrapper>
-                    <MenuButton onClick={this.handleClick}>{this.state.open ? '-' : '+'}</MenuButton>
+                    <MenuButton onClick={this.handleClick}>{this.state.open ? <Icon src={CloseIcon} /> : <Icon src={MenuIcon} />}</MenuButton>
                 </ButtonWrapper>
             </MenuRoot>
         )

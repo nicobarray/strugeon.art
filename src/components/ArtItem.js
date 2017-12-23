@@ -27,6 +27,8 @@ const GalleryImage = Image.extend`
   width: 60vw;
   height: auto;
 
+  animation: fadein 2s;
+
   /* Mobile. */
   @media screen and (max-width: 664px) {
     margin-bottom: 64px;
