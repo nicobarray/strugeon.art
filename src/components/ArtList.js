@@ -18,7 +18,6 @@ const ArtList = props => (
           <ArtItem
             key={art.id}
             image={art.imageUrl}
-            height={300}
             title={art.title}
             date={art.date}
             dimension={{

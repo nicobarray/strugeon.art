@@ -8,6 +8,11 @@ import 'react-select/dist/react-select.css'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './configureStore'
+import ReactGA from 'react-ga'
+
+// Google Analytics
+ReactGA.initialize('UA-110256150-1')
+ReactGA.pageview(window.location.pathname + window.location.search)
 
 const store = configureStore()
 

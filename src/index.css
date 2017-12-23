@@ -4,7 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-* {
+*, *:after, *:before {
   box-sizing: border-box;
   font-family: 'Quicksand';
 }

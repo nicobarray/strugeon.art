@@ -57,10 +57,11 @@ const ImageFeature = styled.div`
 `
 
 const Dimension = props => {
-  if (props.width) {
+  console.log(props)
+  if (props.width && props.height) {
     return (
       <ImageFeature>
-        Dimension {props.width}x{props.height}cm
+        Dimension {props.height}x{props.width}cm
       </ImageFeature>
     )
   }
@@ -77,8 +78,8 @@ const ArtItem = props => {
         <ImageFeature>{props.features || 'Painting Feature'}</ImageFeature>
         {props.dimension.width || props.dimension.height ? (
           <Dimension
-            width={props.dimension.width}
-            height={props.dimension.height}
+            width={props.dimension.height}
+            height={props.dimension.width}
           />
         ) : null}
       </ArtInfo>

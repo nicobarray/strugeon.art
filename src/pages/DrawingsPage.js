@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
 
 import Drawings from '../containers/Drawings'
 import Categorizer from '../containers/Categorizer'

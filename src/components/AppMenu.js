@@ -1,26 +1,27 @@
 // Libraries.
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import styled from 'styled-components'
-import { compose, lifecycle } from 'recompact'
+import { compose } from 'recompact'
 
 import peintureLogo from '../res/peinture.jpg'
 import dessinLogo from '../res/dessin.jpg'
 import sculptureLogo from '../res/sculpture.jpg'
-import quiLogo from '../res/qui.jpg'
+import quiLogo from '../res/who.jpg'
+
+import Menu from './Menu'
 
 const View = styled.div`
   /* Dimensions */
   height: 200px;
 
-  padding: 16px 32px 16px;
-
   /* Layout */
-  display: grid;
-  grid-template-areas: 'Menu Title Logo';
+  display: flex;
+  justify-content: space-between;
 
-  /* Background */
-  background: #313131;
+  /* Color */
+  background: white;
+  border-bottom: 1px solid #f1f1f1;
 
   /* Text */
   font-size: 1em;
@@ -30,31 +31,19 @@ const View = styled.div`
   @media screen and (max-width: 664px) {
     /* Text */
     font-size: 0.7em;
-    grid-template-areas:
-      'Title Title'
-      'Menu Logo';
     grid-row-gap: 15px;
   }
 `
 
-const PageLinks = styled.div`
-  grid-area: Menu;
+const LogoWrapper = styled.div`
+  grid-area: Logo;
+
+  /* Dimensions */
+  height: 100%;
 
   display: flex;
-  flex-flow: column nowrap;
-
-  font-size: 0.8em;
-`
-
-const PageLink = styled(Link)`
-  /* Dimensions */
-  margin: 8px;
-
-  /* Text */
-  text-decoration: none;
-  font-size: 1.5em;
-  font-weight: ${props => (props.active == 'true' ? '700' : '500')};
-  color: ${props => (props.active != 'true' ? '#d29374' : 'white')};
+  justify-content: center;
+  align-items: center;
 `
 
 const Logo = styled.img`
@@ -83,15 +72,16 @@ const Logo = styled.img`
 `
 
 const Title = styled.div`
-  grid-area: Title;
+  /* Layout */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  /* Text */
   font-size: 32px;
-
   color: #acbfb4;
-  text-shadow: 0 0 10px #acbfb4;
-  text-align: center;
-  font-weight: 700;
-  font-style: italic;
+  //text-shadow: 0 0 10px #acbfb4;
+  //text-align: center;
 
   /* Mobile. */
   @media screen and (max-width: 664px) {
@@ -117,38 +107,28 @@ const Back = styled.button`
   border-radius: 50%;
 `
 
-const imageFromLocation = location => {
-  if (location === 'peintures') return peintureLogo
-  if (location === 'dessins') return dessinLogo
-  if (location === 'sculptures') return sculptureLogo
+const imageFromLocation = where => {
+  if (where === 'peintures') return peintureLogo
+  if (where === 'dessins') return dessinLogo
+  if (where === 'sculptures') return sculptureLogo
+  if (where === 'qui') return quiLogo
   return peintureLogo
 }
 
 const AppMenu = props => {
   const { location: { pathname } } = props
   const where = pathname.substr(1)
-  return (
+  return [
     <View>
-      <Title>Terre & Couleur</Title>
-      <PageLinks>
-        <PageLink to={'/peintures'} active={'' + (where === 'peintures')}>
-          Peinture
-        </PageLink>
-        <PageLink to={'/dessins'} active={'' + (where === 'dessins')}>
-          Dessin
-        </PageLink>
-        <PageLink to={'/sculptures'} active={'' + (where === 'sculptures')}>
-          Sculpture
-        </PageLink>
-        <PageLink to={'/qui'} active={'' + (where === 'qui')}>
-          Qui?
-        </PageLink>
-      </PageLinks>
-      <Logo src={imageFromLocation(where)} alt="logo" />
-      <Back onClick={e => window.scrollTo(0, 0)}>⬆</Back>
-    </View>
-  )
+      <LogoWrapper>
+        <Logo src={imageFromLocation(where)} alt="logo" />
+      </LogoWrapper>
+      <Title>Strugeon Art Gallery</Title>
+      <Menu where={where} />
+    </View>,
+    <Back onClick={e => window.scrollTo(0, 0)}>⬆</Back>
+  ]
 }
 
 const enhance = compose(withRouter)
-export default withRouter(AppMenu)
+export default enhance(AppMenu)

@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import ReactMarkdown from 'react-markdown'
 
 const View = styled.div`
   width: 100%;
@@ -9,7 +10,7 @@ const View = styled.div`
   align-items: center;
 `
 
-const Description = styled.div`
+const Description = styled(ReactMarkdown)`
   margin: 32px;
 
   font-size: 1em;
@@ -27,7 +28,7 @@ const Email = styled.div`
 const Who = props => {
   return (
     <View>
-      <Description>{props.description}</Description>
+      <Description source={props.description} />
       <Email>{props.email}</Email>
     </View>
   )
