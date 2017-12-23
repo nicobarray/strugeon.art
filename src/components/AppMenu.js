@@ -13,33 +13,27 @@ import Menu from './Menu'
 
 const View = styled.div`
   /* Dimensions */
-  height: 200px;
+  height: 180px;
 
   /* Layout */
   display: flex;
   justify-content: space-between;
 
   /* Color */
-  background: white;
-  border-bottom: 1px solid #f1f1f1;
+  background: #e9e9e9;
+  border-bottom: 1px solid #fafafa;
 
   /* Text */
   font-size: 1em;
   text-align: left;
-
-  /* Mobile. */
-  @media screen and (max-width: 664px) {
-    /* Text */
-    font-size: 0.7em;
-    grid-row-gap: 15px;
-  }
 `
 
 const LogoWrapper = styled.div`
-  grid-area: Logo;
-
   /* Dimensions */
   height: 100%;
+  max-width: 300px;
+
+  padding: 32px;
 
   display: flex;
   justify-content: center;
@@ -50,14 +44,10 @@ const Logo = styled.img`
   grid-area: Logo;
   justify-self: flex-end;
 
-  height: 130px;
+  height: 100px;
+  width: auto;
 
-  border-radius: 50%;
-
-  /* Mobile. */
-  @media screen and (max-width: 664px) {
-    height: 100px;
-  }
+  border-radius: 15%;
 
   @keyframes fadein {
     from {
@@ -74,19 +64,13 @@ const Logo = styled.img`
 const Title = styled.div`
   /* Layout */
   display: flex;
-  justify-content: center;
   align-items: center;
 
   /* Text */
   font-size: 32px;
-  color: #acbfb4;
-  //text-shadow: 0 0 10px #acbfb4;
-  //text-align: center;
+  color: grey;
 
-  /* Mobile. */
-  @media screen and (max-width: 664px) {
-    font-size: 24px;
-  }
+  margin-left: 8px;
 `
 
 const Back = styled.button`
@@ -94,16 +78,16 @@ const Back = styled.button`
   height: 30px;
 
   position: fixed;
-  left: calc(100vw - 40px);
-  top: calc(100vh - 40px);
+  left: calc(100vw - 34px);
+  top: calc(100vh - 72px);
 
   text-align: center;
   line-height: 30px;
 
-  background: #313131;
-  color: white;
+  background: #fafafa;
+  color: #313131;
 
-  border: 1px solid #aaa;
+  border: 1px solid grey;
   border-radius: 50%;
 `
 
@@ -119,14 +103,14 @@ const AppMenu = props => {
   const { location: { pathname } } = props
   const where = pathname.substr(1)
   return [
-    <View>
+    <View key={0}>
       <LogoWrapper>
         <Logo src={imageFromLocation(where)} alt="logo" />
+        <Title>Strugeon Art Gallery</Title>
       </LogoWrapper>
-      <Title>Strugeon Art Gallery</Title>
       <Menu where={where} />
     </View>,
-    <Back onClick={e => window.scrollTo(0, 0)}>⬆</Back>
+    <Back key={1} onClick={e => window.scrollTo(0, 0)}>⬆</Back>
   ]
 }
 

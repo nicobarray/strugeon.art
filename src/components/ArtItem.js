@@ -5,12 +5,17 @@ import styled from 'styled-components'
 import { Image } from './styled'
 
 const ArtView = styled.div`
+  width: 100%;
+
   display: grid;
 
   grid-template-areas: 'Title Image' 'Description Image';
+  grid-template-columns: 33% auto;
 
   @media screen and (max-width: 664px) {
     grid-template-areas: 'Image' 'Title' 'Description';
+    grid-template-rows: auto auto auto;
+    grid-template-columns: auto;
   }
 
   margin-bottom: 128px;
@@ -19,19 +24,25 @@ const ArtView = styled.div`
 const GalleryImage = Image.extend`
   grid-area: Image;
 
-  width: 300px;
+  width: 60vw;
   height: auto;
 
   /* Mobile. */
   @media screen and (max-width: 664px) {
     margin-bottom: 64px;
+    justify-self: center;
   }
+`
+
+const PortraitGalleryImage = GalleryImage.extend`
+  width: auto;
+  height: calc(90vmin)
 `
 
 const ArtInfo = styled.div`
   grid-area: Description;
 
-  width: 300px;
+  padding-left: 32px;
 
   display: flex;
   flex-flow: column nowrap;
@@ -39,6 +50,8 @@ const ArtInfo = styled.div`
 
 const ArtTitle = styled.div`
   grid-area: Title;
+
+  padding-left: 32px;
 
   /* Text */
   font-size: 1.5em;
@@ -57,7 +70,6 @@ const ImageFeature = styled.div`
 `
 
 const Dimension = props => {
-  console.log(props)
   if (props.width && props.height) {
     return (
       <ImageFeature>
@@ -68,10 +80,24 @@ const Dimension = props => {
   return <ImageFeature>Taille {props.height}cm</ImageFeature>
 }
 
+const getImageSize = (imageUrl) => {
+  try {
+    const [width, height] = imageUrl.split('-')[1].split('.')[0].split('x')
+    return { width: parseInt(width, 10), height: parseInt(height, 10) }
+  } catch (err) {
+    return { width: undefined, height: undefined }
+  }
+}
+
 const ArtItem = props => {
+  const size = getImageSize(props.image)
+  const landscape = size.width > size.height
+
+  const Img = landscape ? GalleryImage : PortraitGalleryImage
+
   return (
     <ArtView>
-      <GalleryImage src={props.image} alt="gallery-image" />
+      <Img src={props.image} alt="gallery-image" />
       <ArtTitle>{props.title || 'Painting Title'}</ArtTitle>
       <ArtInfo height={props.height}>
         <ImageCreationDate>{props.date || 'Painting Date'}</ImageCreationDate>

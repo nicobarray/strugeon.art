@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const View = styled.div`
   /* Dimensions */
-  -height: 100vh;
+  //-height: 100vh;
 
   /* Layout */
   display: flex;
