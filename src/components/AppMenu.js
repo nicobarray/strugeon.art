@@ -64,24 +64,6 @@ const Title = styled.div`
   margin-left: 8px;
 `
 
-const Back = styled.button`
-  width: 30px;
-  height: 30px;
-
-  position: fixed;
-  left: calc(100vw - 34px);
-  top: calc(100vh - 72px);
-
-  text-align: center;
-  line-height: 30px;
-
-  background: #fafafa;
-  color: #313131;
-
-  border: 1px solid grey;
-  border-radius: 50%;
-`
-
 const imageFromLocation = where => {
   if (where === 'peintures') return peintureLogo
   if (where === 'dessins') return dessinLogo
@@ -95,18 +77,15 @@ const AppMenu = props => {
     location: { pathname }
   } = props
   const where = pathname.substr(1)
-  return [
-    <View key={0}>
+  return (
+    <View>
       <LogoWrapper>
         <Logo src={imageFromLocation(where)} alt="logo" />
         <Title>Strugeon Art Gallery</Title>
       </LogoWrapper>
       <Menu where={where} />
-    </View>,
-    <Back key={1} onClick={e => window.scrollTo(0, 0)}>
-      ⬆
-    </Back>
-  ]
+    </View>
+  )
 }
 
 const enhance = compose(withRouter)
