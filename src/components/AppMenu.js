@@ -91,7 +91,9 @@ const imageFromLocation = where => {
 }
 
 const AppMenu = props => {
-  const { location: { pathname } } = props
+  const {
+    location: { pathname }
+  } = props
   const where = pathname.substr(1)
   return [
     <View key={0}>
@@ -101,7 +103,9 @@ const AppMenu = props => {
       </LogoWrapper>
       <Menu where={where} />
     </View>,
-    <Back key={1} onClick={e => window.scrollTo(0, 0)}>⬆</Back>
+    <Back key={1} onClick={e => window.scrollTo(0, 0)}>
+      ⬆
+    </Back>
   ]
 }
 

@@ -7,7 +7,7 @@ import MenuIcon from '../res/menu-icon.png'
 
 const MenuRoot = styled.div`
   width: 200px;
-  
+
   display: flex;
   justify-content: flex-end;
 
@@ -25,9 +25,9 @@ const MenuRoot = styled.div`
 const PageLinks = styled.div`
   /* Dimensions */
   height: 100%;
-  width: ${props => props.open ? '140px' : '0'};
+  width: ${props => (props.open ? '140px' : '0')};
 
-  padding: ${props => props.open ? '15px 15px' : '0'};
+  padding: ${props => (props.open ? '15px 15px' : '0')};
 
   overflow: hidden;
 
@@ -45,115 +45,126 @@ const PageLinks = styled.div`
 `
 
 const AnimatedPageLinks = PageLinks.extend`
-    /* Animation */
-    animation: ${props => props.open ? '.5s slide-in' : (props.once ? '.5s slide-out' : '')};
+  /* Animation */
+  animation: ${props =>
+    props.open ? '.5s slide-in' : props.once ? '.5s slide-out' : ''};
 
-    @keyframes slide-in {
-        from {
-            width: 0px;
-        }
-        to {
-            width: 140px;
-        }
+  @keyframes slide-in {
+    from {
+      width: 0px;
     }
+    to {
+      width: 140px;
+    }
+  }
 
-    @keyframes slide-out {
-        from {
-            width: 140px;
-        }
-        to {
-            width: 0px;
-        }
+  @keyframes slide-out {
+    from {
+      width: 140px;
     }
+    to {
+      width: 0px;
+    }
+  }
 `
 
-const PageLink = styled(Link) `
-    /* Dimensions */
-    margin: 8px;
+const PageLink = styled(Link)`
+  /* Dimensions */
+  margin: 8px;
 
-    /* Text */
-    text-decoration: none;
-    font-size: 1.5em;
-    font-weight: ${ props => (props.active === 'true' ? '700' : '500')};
-    color: ${ props => (props.active !== 'true' ? '#d29374' : 'blue')};
+  /* Text */
+  text-decoration: none;
+  font-size: 1.5em;
+  font-weight: ${props => (props.active === 'true' ? '700' : '500')};
+  color: ${props => (props.active !== 'true' ? '#9c3400' : 'blue')};
 `
 
 const MenuButton = styled.button`
-    height: 32px;
-    width: 32px;
+  height: 32px;
+  width: 32px;
 
-    padding: 0px;
+  padding: 0px;
 
-    border: 0;
+  border: 0;
 
-    background: transparent;
+  background: transparent;
 
-    /* Text */
-    font-size: 24px;
-    line-height: 36px;
+  /* Text */
+  font-size: 24px;
+  line-height: 36px;
 `
 
 const ButtonWrapper = styled.div`
-    width: 40px;
-    hegiht: 200px;
-    background: white;
-    padding: 4px;
+  width: 40px;
+  hegiht: 200px;
+  background: white;
+  padding: 4px;
 `
 
 const Icon = styled.img`
-    width: 28px;
-    height: 28px;
+  width: 28px;
+  height: 28px;
 `
 
 class Menu extends React.Component {
-    state = {
-        open: false,
-        // Set the ease-out animation only if the button was clicked once before..
-        once: false
-    }
+  state = {
+    open: false,
+    // Set the ease-out animation only if the button was clicked once before..
+    once: false
+  }
 
-    componentDidMount() {
-        if (document.body.clientWidth > 662) {
-            this.setState(prevState => ({ open: true }))
-        }
+  componentDidMount() {
+    if (document.body.clientWidth > 662) {
+      this.setState(prevState => ({ open: true }))
     }
+  }
 
-    renderLinks() {
-        const { where } = this.props
+  renderLinks() {
+    const { where } = this.props
 
-        return [
-            <PageLink key={0} to={'/peintures'} active={'' + (where === 'peintures')}>
-                Peinture
-            </PageLink>,
-            <PageLink key={1} to={'/dessins'} active={'' + (where === 'dessins')}>
-                Dessin
-            </PageLink>,
-            <PageLink key={2} to={'/sculptures'} active={'' + (where === 'sculptures')}>
-                Sculpture
-            </PageLink>,
-            <PageLink key={3} to={'/qui'} active={'' + (where === 'qui')}>
-                Qui ?
-            </PageLink>
-        ]
-    }
+    return [
+      <PageLink key={0} to={'/peintures'} active={'' + (where === 'peintures')}>
+        Peinture
+      </PageLink>,
+      <PageLink key={1} to={'/dessins'} active={'' + (where === 'dessins')}>
+        Dessin
+      </PageLink>,
+      <PageLink
+        key={2}
+        to={'/sculptures'}
+        active={'' + (where === 'sculptures')}
+      >
+        Sculpture
+      </PageLink>,
+      <PageLink key={3} to={'/qui'} active={'' + (where === 'qui')}>
+        Qui ?
+      </PageLink>
+    ]
+  }
 
-    handleClick = (e) => {
-        this.setState(prevState => ({ open: !prevState.open, once: true }))
-    }
+  handleClick = e => {
+    this.setState(prevState => ({ open: !prevState.open, once: true }))
+  }
 
-    render() {
-        const Links = AnimatedPageLinks
-        return (
-            <MenuRoot className={this.props.className} open={this.state.open}>
-                <Links open={this.state.open} once={this.state.once}>
-                    {this.renderLinks()}
-                </Links>
-                <ButtonWrapper>
-                    <MenuButton onClick={this.handleClick}>{this.state.open ? <Icon src={CloseIcon} /> : <Icon src={MenuIcon} />}</MenuButton>
-                </ButtonWrapper>
-            </MenuRoot>
-        )
-    }
+  render() {
+    const Links = AnimatedPageLinks
+    return (
+      <MenuRoot className={this.props.className} open={this.state.open}>
+        <Links open={this.state.open} once={this.state.once}>
+          {this.renderLinks()}
+        </Links>
+        <ButtonWrapper>
+          <MenuButton onClick={this.handleClick}>
+            {this.state.open ? (
+              <Icon src={CloseIcon} />
+            ) : (
+              <Icon src={MenuIcon} />
+            )}
+          </MenuButton>
+        </ButtonWrapper>
+      </MenuRoot>
+    )
+  }
 }
 
 export default Menu

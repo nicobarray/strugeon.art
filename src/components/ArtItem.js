@@ -3,6 +3,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Image } from './styled'
+import Feedback from './Feedback'
 
 const ArtView = styled.div`
   width: 100%;
@@ -38,7 +39,7 @@ const GalleryImage = Image.extend`
 
 const PortraitGalleryImage = GalleryImage.extend`
   width: auto;
-  height: calc(90vmin)
+  height: 90vmin;
 `
 
 const ArtInfo = styled.div`
@@ -75,16 +76,25 @@ const Dimension = props => {
   if (props.width && props.height) {
     return (
       <ImageFeature>
-        Dimension {props.height}x{props.width}cm
+        Dimension {props.height}x{props.width}
+        cm
       </ImageFeature>
     )
   }
-  return <ImageFeature>Taille {props.height}cm</ImageFeature>
+  return (
+    <ImageFeature>
+      Taille {props.height}
+      cm
+    </ImageFeature>
+  )
 }
 
-const getImageSize = (imageUrl) => {
+const getImageSize = imageUrl => {
   try {
-    const [width, height] = imageUrl.split('-')[1].split('.')[0].split('x')
+    const [width, height] = imageUrl
+      .split('-')[1]
+      .split('.')[0]
+      .split('x')
     return { width: parseInt(width, 10), height: parseInt(height, 10) }
   } catch (err) {
     return { width: undefined, height: undefined }
@@ -111,6 +121,7 @@ const ArtItem = props => {
           />
         ) : null}
       </ArtInfo>
+      <Feedback />
     </ArtView>
   )
 }
