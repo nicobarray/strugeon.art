@@ -19,7 +19,11 @@ const actionCreators = {
         features: data.categories,
         height: data.width,
         width: data.height,
-        imageUrl: data.imageUrl
+        imageUrl: data.imageUrl,
+        imageUrl2: data.imageUrl2,
+        imageUrl3: data.imageUrl3,
+        imageUrl4: data.imageUrl4,
+        imageUrl5: data.imageUrl5
       }
     }),
     addBatch: (artworks, contentType) => ({
@@ -34,7 +38,11 @@ const actionCreators = {
           categories: data.categories,
           width: data.width,
           height: data.height,
-          imageUrl: data.imageUrl
+          imageUrl: data.imageUrl,
+          imageUrl2: data.imageUrl2,
+          imageUrl3: data.imageUrl3,
+          imageUrl4: data.imageUrl4,
+          imageUrl5: data.imageUrl5
         }))
       }
     })

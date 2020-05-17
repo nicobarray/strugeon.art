@@ -38,7 +38,7 @@ const GalleryImage = Image.extend`
 
 const PortraitGalleryImage = GalleryImage.extend`
   width: auto;
-  height: 90vmin;
+  height: 80vmin;
 `
 
 const ArtInfo = styled.div`
@@ -100,16 +100,64 @@ const getImageSize = imageUrl => {
   }
 }
 
+const ImgCarroussel = styled.div`
+  display: flex;
+  flex-flow: row nowrap;
+
+  & > img:not(:last-child) {
+    margin-right: 16px;
+  }
+
+  position: relative;
+`
+
+const CarrousselControler = styled.div`
+  position: absolute;
+
+  top: calc(100% + 16px);
+
+  & > button {
+    width: 32px; 
+    height: 32px;
+
+    border: 2px solid white;
+    border-radius 50%;
+    background: #9c3400;
+    color: white;
+    font-size: 1em;
+  }
+
+  & > button:nth-child(${props => props.selectedIndex + 1}) {
+    background: blue;
+  }
+
+  & > button:not(:last-child) {
+    margin-right: 16px;
+  }
+`
+
 const ArtItem = props => {
+  const [carrousselIndex, setCarrousselIndex] = React.useState(0)
+
   const size = getImageSize(props.image)
   const landscape = size.width > size.height
 
+  const images = [props.image, props.image2, props.image3].filter(Boolean)
   const Img = landscape ? GalleryImage : PortraitGalleryImage
 
   return (
     <ArtView>
-      <Img src={props.image} alt="gallery-image" />
-      <ArtTitle>{props.title || 'Painting Title'}</ArtTitle>
+      <ImgCarroussel>
+        <Img key={images[carrousselIndex]} src={images[carrousselIndex]} alt="gallery-image" />
+        {images.length > 1 && <CarrousselControler selectedIndex={carrousselIndex}>
+          {images.map((src, index) => {
+            return <button key={src} onClick={() => setCarrousselIndex(index)}>
+              {index + 1}
+            </button>
+          })}
+        </CarrousselControler>}
+      </ImgCarroussel>
+      <ArtTitle>{[props.title || 'Painting Title', images.length > 1 ? images.length : null].filter(Boolean).join(' ')}</ArtTitle>
       <ArtInfo height={props.height}>
         <ImageCreationDate>{props.date || 'Painting Date'}</ImageCreationDate>
         <ImageFeature>{props.features || 'Painting Feature'}</ImageFeature>

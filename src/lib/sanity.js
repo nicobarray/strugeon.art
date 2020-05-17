@@ -18,7 +18,11 @@ export const hydrateStore = async store => {
       width,
       height,
       categories,
-      "imageUrl": image.asset->url
+      "imageUrl": image.asset->url,
+      "imageUrl2": image2.asset->url,
+      "imageUrl3": image3.asset->url,
+      "imageUrl4": image4.asset->url,
+      "imageUrl5": image5.asset->url
   }`)
   const sculptures = await instance.fetch(`
   *[_type == "sculpture"]{
@@ -27,7 +31,11 @@ export const hydrateStore = async store => {
       date,
       height,
       categories,
-      "imageUrl": image.asset->url
+      "imageUrl": image.asset->url,
+      "imageUrl2": image2.asset->url,
+      "imageUrl3": image3.asset->url,
+      "imageUrl4": image4.asset->url,
+      "imageUrl5": image5.asset->url
   }`)
   const drawings = await instance.fetch(`
   *[_type == "drawings"]{
@@ -37,7 +45,11 @@ export const hydrateStore = async store => {
       width,
       height,
       categories,
-      "imageUrl": image.asset->url
+      "imageUrl": image.asset->url,
+      "imageUrl2": image2.asset->url,
+      "imageUrl3": image3.asset->url,
+      "imageUrl4": image4.asset->url,
+      "imageUrl5": image5.asset->url
   }`)
   const who = await instance.fetch(`
   *[_type == "who"]{
@@ -46,11 +58,6 @@ export const hydrateStore = async store => {
       "imageUrl": image.asset->url
   }`)
 
-  console.log('Fetched paintings: ', paintings)
-  console.log('Fetched drawings: ', drawings)
-  console.log('Fetched sculptures: ', sculptures)
-  console.log('Fetched who: ', who)
-
   store.dispatch(actionCreators.arts.addBatch(paintings, 'painting'))
   store.dispatch(actionCreators.arts.addBatch(sculptures, 'sculpture'))
   store.dispatch(actionCreators.arts.addBatch(drawings, 'drawing'))
@@ -58,6 +65,4 @@ export const hydrateStore = async store => {
   if (who.length === 1) {
     store.dispatch(actionCreators.who.add(who[0].description, who[0].email))
   }
-
-  //store.dispatch(actionCreators.arts.addBatch(paintings))
 }

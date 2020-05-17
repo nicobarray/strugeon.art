@@ -65,7 +65,7 @@ const reducers = (prevState = initialState, action) => {
 }
 
 const isMatchingFilter = (features, state) =>
-  state.activeFilters.some(filter => features.includes(filter))
+  state.activeFilters.length > 0 ? state.activeFilters.some(filter => features.includes(filter)) : true
 
 export const selectors = {
   getDescription: state => {
