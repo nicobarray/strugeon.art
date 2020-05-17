@@ -12,15 +12,11 @@ import Who from './containers/Who'
 // Components.
 import AppMenu from './components/AppMenu'
 
-const AppView = styled.div`
-  overflow: auto;
-`
-
 class App extends Component {
   render() {
     return (
       <Router>
-        <AppView>
+        <div>
           <AppMenu />
           <Switch>
             <Route exact path="/peintures" component={Paintings} />
@@ -29,7 +25,7 @@ class App extends Component {
             <Route exact path="/qui" component={Who} />
             <Route component={Paintings} />
           </Switch>
-        </AppView>
+        </div>
       </Router>
     )
   }

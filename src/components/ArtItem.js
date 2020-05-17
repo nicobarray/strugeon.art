@@ -3,7 +3,6 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Image } from './styled'
-import Feedback from './Feedback'
 
 const ArtView = styled.div`
   width: 100%;
@@ -121,7 +120,6 @@ const ArtItem = props => {
           />
         ) : null}
       </ArtInfo>
-      <Feedback />
     </ArtView>
   )
 }

@@ -74,9 +74,10 @@ const PageLink = styled(Link)`
 
   /* Text */
   text-decoration: none;
-  font-size: 1.5em;
-  font-weight: ${props => (props.active === 'true' ? '700' : '500')};
-  color: ${props => (props.active !== 'true' ? '#9c3400' : 'blue')};
+  font-size: 1.7em;
+
+  font-weight: ${props => (props.active === 'true' ? 'bold' : 'normal')};
+  color: ${props => (props.active !== 'true' ? '#9c3400' : '#00349c')};
 `
 
 const MenuButton = styled.button`
@@ -158,8 +159,8 @@ class Menu extends React.Component {
             {this.state.open ? (
               <Icon src={CloseIcon} />
             ) : (
-              <Icon src={MenuIcon} />
-            )}
+                <Icon src={MenuIcon} />
+              )}
           </MenuButton>
         </ButtonWrapper>
       </MenuRoot>

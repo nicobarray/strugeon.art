@@ -4,14 +4,11 @@ body {
   font-family: sans-serif;
 }
 
-*, *:after, *:before {
+*,
+*:after,
+*:before {
   box-sizing: border-box;
-  font-family: 'Quicksand';
-}
-
-@font-face {
-  font-family: 'Quicksand';
-  src: url('./res/Quicksand_Light.otf') format('OpenType');
+  font-family: 'Quicksand', sans-serif;
 }
 
 /* Animations */
