@@ -5,7 +5,7 @@
   "dependencies": {
     "@sanity/client": "^0.121.0",
     "image-size": "^0.6.1",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.19",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
     "react-ga": "^2.3.5",
